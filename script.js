@@ -175,7 +175,7 @@
         const pinPopupClose = document.getElementById('pin-popup-close');
 
         // DEFAULT PIN: Silakan ubah angka ini jika ingin PIN lain
-        const SECRET_PIN = "1726";
+        const SECRET_PIN = "040626";
 
         let pinAttempt = 0;
         let popupTimeout = null;
@@ -281,7 +281,7 @@
 
         if (pinInput) {
             pinInput.addEventListener('input', function () {
-                if (pinInput.value.length === 4) {
+                if (pinInput.value.length === 6) {
                     // Delay sedikit agar digit terakhir terasa diketik
                     setTimeout(() => {
                         if (pinInput.value === SECRET_PIN) {
@@ -440,6 +440,10 @@ document.addEventListener("DOMContentLoaded", function () {
                 else if (this.classList.contains('polaroid')) {
                     modalImg.src = this.querySelector('img').src;
                     modalImg.style.aspectRatio = "1 / 1";
+                    const captionEl = this.querySelector('.caption');
+                    if (modalCaption && captionEl) {
+                        modalCaption.innerText = captionEl.innerText;
+                    }
                 }
                 // D. JIKA YANG DIKLIK ADALAH GALERI CINTA
                 else {

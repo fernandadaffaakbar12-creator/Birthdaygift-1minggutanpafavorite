@@ -1303,7 +1303,8 @@ body {
     outline: none;
     background: rgba(255, 255, 255, 0.1);
     color: #fff;
-    letter-spacing: 15px;
+    letter-spacing: 10px;
+    text-indent: 10px;
     margin-bottom: 20px;
     transition: all 0.3s ease;
 }
