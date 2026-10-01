@@ -175,7 +175,7 @@
         const pinPopupClose = document.getElementById('pin-popup-close');
 
         // DEFAULT PIN: Silakan ubah angka ini jika ingin PIN lain
-        const SECRET_PIN = "2708";
+        const SECRET_PIN = "1726";
 
         let pinAttempt = 0;
         let popupTimeout = null;
@@ -393,20 +393,35 @@ document.addEventListener("DOMContentLoaded", function () {
                     modalImg.style.display = 'none'; // Sembunyikan foto
                     modalIframe.style.display = 'block'; // Tampilkan alat musik/video
 
-                    const embedUrl = this.getAttribute('data-embed');
-                    modalIframe.src = embedUrl; // Masukkan link
+                    let embedUrl = this.getAttribute('data-embed');
 
                     // Hapus class lama
-                    modalIframe.classList.remove('iframe-spotify', 'iframe-youtube', 'iframe-facebook');
+                    modalIframe.classList.remove('iframe-spotify', 'iframe-youtube', 'iframe-facebook', 'iframe-tiktok');
 
-                    // Deteksi platform untuk penyesuaian rasio (16:9 untuk YouTube, Kotak untuk Spotify, 9:16 untuk Facebook)
+                    // Deteksi platform untuk penyesuaian rasio (16:9 untuk YouTube, Kotak untuk Spotify, 9:16 untuk Facebook/TikTok)
                     if (embedUrl.includes('youtube.com') || embedUrl.includes('youtu.be')) {
                         modalIframe.classList.add('iframe-youtube');
+                        if (embedUrl.includes('watch?v=')) {
+                            const ytId = embedUrl.split('watch?v=')[1].split('&')[0];
+                            embedUrl = `https://www.youtube.com/embed/${ytId}`;
+                        } else if (embedUrl.includes('youtu.be/')) {
+                            const ytId = embedUrl.split('youtu.be/')[1].split('?')[0];
+                            embedUrl = `https://www.youtube.com/embed/${ytId}`;
+                        }
                     } else if (embedUrl.includes('spotify.com')) {
                         modalIframe.classList.add('iframe-spotify');
                     } else if (embedUrl.includes('facebook.com')) {
                         modalIframe.classList.add('iframe-facebook');
+                    } else if (embedUrl.includes('tiktok.com')) {
+                        modalIframe.classList.add('iframe-tiktok');
+                        // Otomatis ubah URL TikTok biasa (misal https://www.tiktok.com/@user/video/1234567890) ke embed player jika belum
+                        const tiktokMatch = embedUrl.match(/(?:video\/|player\/v1\/|embed\/v2\/)(\d+)/);
+                        if (tiktokMatch && tiktokMatch[1] && !embedUrl.includes('/player/v1/')) {
+                            embedUrl = `https://www.tiktok.com/player/v1/${tiktokMatch[1]}`;
+                        }
                     }
+
+                    modalIframe.src = embedUrl; // Masukkan link
 
                     const customCaption = this.getAttribute('data-caption');
                     const teksCaption = customCaption ? customCaption : this.querySelector('.planet-caption').innerText;

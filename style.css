@@ -637,6 +637,14 @@ body {
     max-height: 80vh;
 }
 
+/* Rasio khusus untuk TikTok (Portrait) */
+#modal-iframe.iframe-tiktok {
+    width: 325px;
+    max-width: 90vw;
+    height: 575px;
+    max-height: 80vh;
+}
+
 #image-modal.show-modal #modal-iframe {
     transform: scale(1);
 }
