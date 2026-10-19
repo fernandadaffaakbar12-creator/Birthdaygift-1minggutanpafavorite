@@ -15,7 +15,8 @@ html {
 
 body {
     font-family: 'Outfit', sans-serif;
-    background: linear-gradient(to bottom, #020111, #20124d, #000022);
+    background: #050508;
+    background: radial-gradient(ellipse at top, #080811 0%, #020204 60%, #000000 100%);
     color: #ffffff;
     overflow-x: hidden;
     min-height: 100vh;
@@ -188,7 +189,7 @@ body {
 
 
 /* =========================================
-   ANIMASI LUAR ANGKASA (Tanpa Bintang Jatuh)
+   ANIMASI BINTANG KERLAP-KERLIP (Ultra-Smooth & Ringan di Mobile)
 ========================================= */
 .stars,
 .twinkling {
@@ -199,26 +200,109 @@ body {
     bottom: 0;
     width: 100%;
     height: 100%;
-    z-index: -2;
+    pointer-events: none;
 }
 
+/* Layer 1: Titik-titik bintang halus tersebar di seluruh layar */
 .stars {
-    background: #000 url('https://s3-us-west-2.amazonaws.com/s.cdpn.io/1231630/stars.png') repeat top center;
     z-index: -3;
+    background: transparent;
+    box-shadow:
+        4vw 8vh 1px #fff, 12vw 32vh 1px rgba(255, 255, 255, 0.9), 18vw 85vh 1px #fff,
+        25vw 15vh 1.5px rgba(255, 255, 255, 0.9), 32vw 62vh 1px #fff, 40vw 92vh 1px rgba(255, 255, 255, 0.8),
+        48vw 28vh 1.5px rgba(255, 255, 255, 0.95), 55vw 74vh 1px #fff, 63vw 12vh 1px rgba(255, 255, 255, 0.9),
+        71vw 48vh 1.5px #fff, 79vw 88vh 1px rgba(255, 255, 255, 0.85), 88vw 22vh 1.5px #fff,
+        94vw 67vh 1px rgba(255, 255, 255, 0.9), 8vw 94vh 1.5px #fff, 85vw 5vh 1px #fff,
+        15vw 45vh 1px rgba(255, 255, 255, 0.7), 22vw 78vh 1.5px #fff, 36vw 5vh 1px #fff,
+        52vw 42vh 1px rgba(255, 255, 255, 0.8), 68vw 90vh 1.5px #fff, 75vw 25vh 1px #fff,
+        92vw 40vh 1.5px rgba(255, 255, 255, 0.9), 3vw 60vh 1px rgba(255, 255, 255, 0.8),
+        45vw 18vh 1px #fff, 58vw 58vh 1.5px #fff, 82vw 70vh 1px rgba(255, 255, 255, 0.85),
+        28vw 38vh 1px #fff, 62vw 35vh 1.5px rgba(255, 255, 255, 0.9), 96vw 15vh 1px #fff,
+        10vw 70vh 1.5px #fff, 50vw 85vh 1px #fff, 73vw 60vh 1.5px rgba(255, 255, 255, 0.95);
+    border-radius: 50%;
+    width: 2px;
+    height: 2px;
+    animation: starPulse1 4s ease-in-out infinite alternate;
+    will-change: opacity;
 }
 
+/* Layer 2: Bintang kerlap-kerlip putih berkilau */
 .twinkling {
-    background: transparent url('https://s3-us-west-2.amazonaws.com/s.cdpn.io/1231630/twinkling.png') repeat top center;
-    animation: move-twink-back 200s linear infinite;
+    z-index: -2;
+    background: transparent;
+    box-shadow:
+        9vw 19vh 1.5px #fff, 14vw 68vh 1px rgba(255, 255, 255, 0.95), 29vw 82vh 1.5px #fff,
+        22vw 25vh 1px #fff, 38vw 48vh 2px rgba(255, 255, 255, 0.9), 43vw 79vh 1px rgba(255, 255, 255, 0.85),
+        51vw 10vh 1.5px #fff, 59vw 95vh 1px #fff, 66vw 30vh 2px rgba(255, 255, 255, 0.95),
+        77vw 55vh 1px #fff, 84vw 35vh 1.5px rgba(255, 255, 255, 0.9), 91vw 80vh 1px #fff,
+        5vw 40vh 1.5px rgba(255, 255, 255, 0.9), 19vw 97vh 1px #fff, 33vw 22vh 1.5px #fff,
+        47vw 65vh 1px rgba(255, 255, 255, 0.8), 64vw 8vh 1.5px #fff, 72vw 76vh 1px rgba(255, 255, 255, 0.9),
+        86vw 50vh 2px #fff, 97vw 92vh 1px rgba(255, 255, 255, 0.85), 16vw 12vh 1.5px #fff,
+        35vw 90vh 1px rgba(255, 255, 255, 0.9), 80vw 18vh 1.5px #fff, 2vw 85vh 1px #fff;
+    border-radius: 50%;
+    width: 2.5px;
+    height: 2.5px;
+    animation: starPulse2 3s ease-in-out infinite alternate;
+    will-change: opacity;
 }
 
-@keyframes move-twink-back {
-    from {
-        background-position: 0 0;
-    }
+/* Efek Bintang Bercahaya Besar (Sparkles) */
+.twinkling::after {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 3px;
+    height: 3px;
+    border-radius: 50%;
+    box-shadow:
+        12vw 15vh 2px 1px rgba(255, 255, 255, 0.9),
+        30vw 55vh 2px 1px rgba(255, 255, 255, 0.95),
+        54vw 22vh 2.5px 1px rgba(255, 255, 255, 0.95),
+        78vw 38vh 2px 1px rgba(255, 255, 255, 0.9),
+        89vw 72vh 2.5px 1px rgba(255, 255, 255, 0.9),
+        20vw 88vh 2px 1px rgba(255, 255, 255, 0.85),
+        67vw 82vh 2px 1px rgba(255, 255, 255, 0.9);
+    animation: starGlitter 2.2s ease-in-out infinite alternate;
+    will-change: opacity;
+}
 
-    to {
-        background-position: -10000px 5000px;
+@keyframes starPulse1 {
+    0% {
+        opacity: 0.35;
+        transform: scale(0.9);
+    }
+    50% {
+        opacity: 0.85;
+    }
+    100% {
+        opacity: 0.45;
+        transform: scale(1.05);
+    }
+}
+
+@keyframes starPulse2 {
+    0% {
+        opacity: 0.75;
+        transform: scale(1.05);
+    }
+    50% {
+        opacity: 0.3;
+    }
+    100% {
+        opacity: 0.9;
+        transform: scale(0.95);
+    }
+}
+
+@keyframes starGlitter {
+    0%, 100% {
+        opacity: 0.2;
+        filter: drop-shadow(0 0 2px rgba(255, 255, 255, 0.3));
+    }
+    50% {
+        opacity: 1;
+        filter: drop-shadow(0 0 6px rgba(255, 182, 193, 0.9)) drop-shadow(0 0 10px rgba(255, 255, 255, 0.8));
     }
 }
 
@@ -818,12 +902,19 @@ body {
 .polaroid-grid {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    /* Membuat susunan 2 ke samping */
+    /* Susunan 2 kolom */
     gap: 20px;
     margin: 20px auto 0 auto;
     /* Memastikan posisinya tepat di tengah */
     max-width: 450px;
     /* KUNCI: Membatasi lebar maksimal agar fotonya tidak terlalu besar */
+}
+
+.polaroid-grid .polaroid:first-child,
+.polaroid-grid .polaroid:last-child {
+    grid-column: 1 / -1;
+    width: 60%;
+    margin: 0 auto;
 }
 
 .polaroid {

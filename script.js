@@ -3,7 +3,7 @@
 // ==========================================
 (function () {
     const PARTICLE_COUNT = 80;
-    const LOVE_TEXTS = ['I love you', 'i love u', 'love', 'ily', '♡', 'luv u', 'sayang', 'cinta'];
+    const LOVE_TEXTS = ['neila', 'adenin', 'happy birthday', '18th', '♡', 'birthday', 'neila', 'adenin'];
 
     // Parametric heart shape formula
     function heartX(t) {
@@ -175,7 +175,7 @@
         const pinPopupClose = document.getElementById('pin-popup-close');
 
         // DEFAULT PIN: Silakan ubah angka ini jika ingin PIN lain
-        const SECRET_PIN = "040626";
+        const SECRET_PIN = "2210";
 
         let pinAttempt = 0;
         let popupTimeout = null;
@@ -186,7 +186,7 @@
                 // Percobaan pertama: tampilkan foto kucing
                 showCat: true,
                 emoji: '',
-                message: 'Masa tanggal spesial kita lupa?',
+                message: 'Masa tanggal ultah sendiri lupa?',
                 buttonText: 'Iya iya maaf 😭'
             },
             {
@@ -281,13 +281,13 @@
 
         if (pinInput) {
             pinInput.addEventListener('input', function () {
-                if (pinInput.value.length === 6) {
+                if (pinInput.value.length === 4) {
                     // Delay sedikit agar digit terakhir terasa diketik
                     setTimeout(() => {
                         if (pinInput.value === SECRET_PIN) {
                             // PIN BENAR
                             showPinPopup({
-                                message: 'Valid!\nLanjut ya sayang~',
+                                message: 'Valid!\nLanjut yaa~',
                                 buttonText: 'Lanjut 💕'
                             }, true);
 
